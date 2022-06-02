@@ -1,0 +1,22 @@
+version: '2'
+services:
+  db:
+    image: mysql:8.0
+    container_name: mysql_container   
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: dbEvent        
+
+
+  autentica_otp:    
+    build: .
+    depends_on:  
+      - db
+    container_name: autentica_otp
+    hostname: autentica_otp   
+
+networks: 
+  default: 
+    external: 
+      name: kafka_confluent_network
